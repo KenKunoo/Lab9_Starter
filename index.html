@@ -102,6 +102,127 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+    // Buttons
+    let errorBtn_first = errorBtns[0];
+    errorBtn_first.addEventListener('click', () => {
+        console.log("Console Log Demo");
+    });
+
+    let errorBtn_second = errorBtns[1];
+    errorBtn_second.addEventListener('click', () => {
+        console.error("Console Error Demo");
+    });
+
+    let errorBtn_third = errorBtns[2];
+    errorBtn_third.addEventListener('click', () => {
+        console.count("Console Count Demo");
+    });
+
+    let errorBtn_fourth = errorBtns[3];
+    errorBtn_fourth.addEventListener('click', () => {
+        console.warn("Console Warning Demo");
+    });
+
+    let errorBtn_fifth = errorBtns[4];
+    errorBtn_fifth.addEventListener('click', () => {
+        console.assert(0 > 1, "0 is not greater than 1");
+    });
+
+    let errorBtn_sixth = errorBtns[5];
+    errorBtn_sixth.addEventListener('click', () => {
+        console.clear("Console Cleared Demo");
+    });
+
+    let errorBtn_seventh = errorBtns[6];
+    errorBtn_seventh.addEventListener('click', () => {
+        console.dir(errorBtn_seventh);
+    });
+
+    let errorBtn_eighth = errorBtns[7];
+    errorBtn_eighth.addEventListener('click', () => {
+        console.dirxml(errorBtn_eighth);
+    });
+
+    let errorBtn_nine = errorBtns[8];
+    errorBtn_nine.addEventListener('click', () => {
+        console.group("Console Group Demo");
+    });
+
+    let errorBtn_ten = errorBtns[9];
+    errorBtn_ten.addEventListener('click', () => {
+        console.groupEnd("Console Group End Demo");
+    });
+
+    let errorBtn_eleven = errorBtns[10];
+    errorBtn_eleven.addEventListener('click', () => {
+        console.table([0,1,2,3,4,5]);
+    });
+
+    let errorBtn_twelve = errorBtns[11];
+    errorBtn_twelve.addEventListener('click', () => {
+        console.time("Timer Demo");
+    });
+
+    let errorBtn_thirdteen = errorBtns[12];
+    errorBtn_thirdteen.addEventListener('click', () => {
+        console.timeEnd("Timer Demo");
+    });
+
+    let errorBtn_fourteen = errorBtns[13];
+    errorBtn_fourteen.addEventListener('click', () => {
+        function One() {
+          function Two() {
+            function Three() {
+              console.trace();
+            }
+              Three();
+          }
+            Two();
+        }
+          One();
+    });
+
+    let errorBtn_fifteen = errorBtns[14];
+    errorBtn_fifteen.addEventListener('click', () => {
+        errorFunction();
+    });
+
+    // Try Catch Finally and Custom Error
+    class MathError extends Error {
+      constructor(message) {
+        super(message);
+        this.name = "MathError"; 
+      }
+    }
+    form.addEventListener('submit', e => {
+      let secondNum = document.querySelector("#second-num").value;
+      // throw if divide by zero
+      if (secondNum == 0 & operator.value == "/") {
+        throw new MathError("Cannot divide by zero.");
+      }
+      // throw if there is not a valid operator
+      if (operator.value != "/" & operator.value != "*" & operator.value != "-" & operator.value != "+") {
+        throw new Error("Not a valid operator");
+      }
+
+      try {
+        let calculateValue = 50 / secondNum;
+      }
+      catch (err) {
+        console.log(err.name); 
+        console.log(err.message);
+      }
+      finally {
+        console.log("continue");
+      }
+
+      // TrackJS
+      window.onerror = function(message, url, line, col, error) {
+        console.log(`${message}\n At ${line}:${col} of ${url}`);
+        TrackJS.track("TrackJS Error");
+      };
+
+    });
   </script>
 </body>
 
