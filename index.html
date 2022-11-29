@@ -86,7 +86,14 @@
       <button>Trigger a Global Error</button>
     </section>
   </main>
-
+  
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "6bad6dbec8b3452b9d67e4eb39368a09"
+      // for more configuration options, see https://docs.trackjs.com/
+    });
+  </script>
   <script>
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
@@ -103,71 +110,72 @@
     // Start your code here
     // You may move this JS to another file if you wish
     // Buttons
+    // console log 
     let errorBtn_first = errorBtns[0];
     errorBtn_first.addEventListener('click', () => {
         console.log("Console Log Demo");
     });
-
+    // console error
     let errorBtn_second = errorBtns[1];
     errorBtn_second.addEventListener('click', () => {
         console.error("Console Error Demo");
     });
-
+    // console count
     let errorBtn_third = errorBtns[2];
     errorBtn_third.addEventListener('click', () => {
         console.count("Console Count Demo");
     });
-
+    // console warning 
     let errorBtn_fourth = errorBtns[3];
     errorBtn_fourth.addEventListener('click', () => {
         console.warn("Console Warning Demo");
     });
-
+    // console assert
     let errorBtn_fifth = errorBtns[4];
     errorBtn_fifth.addEventListener('click', () => {
         console.assert(0 > 1, "0 is not greater than 1");
     });
-
+    // console clear 
     let errorBtn_sixth = errorBtns[5];
     errorBtn_sixth.addEventListener('click', () => {
         console.clear("Console Cleared Demo");
     });
-
+    // console dir 
     let errorBtn_seventh = errorBtns[6];
     errorBtn_seventh.addEventListener('click', () => {
-        console.dir(errorBtn_seventh);
+        console.dir(document.querySelector("#error-btns"));
     });
-
+    // console dirxml
     let errorBtn_eighth = errorBtns[7];
     errorBtn_eighth.addEventListener('click', () => {
-        console.dirxml(errorBtn_eighth);
+        console.dirxml(document.querySelector("#error-btns"));
     });
-
+    // console group
     let errorBtn_nine = errorBtns[8];
     errorBtn_nine.addEventListener('click', () => {
         console.group("Console Group Demo");
     });
-
+    // console groupEnd
     let errorBtn_ten = errorBtns[9];
     errorBtn_ten.addEventListener('click', () => {
         console.groupEnd("Console Group End Demo");
     });
-
+    // console table
     let errorBtn_eleven = errorBtns[10];
     errorBtn_eleven.addEventListener('click', () => {
         console.table([0,1,2,3,4,5]);
     });
-
+    // console time 
     let errorBtn_twelve = errorBtns[11];
     errorBtn_twelve.addEventListener('click', () => {
         console.time("Timer Demo");
     });
-
+    // console timeEnd
     let errorBtn_thirdteen = errorBtns[12];
     errorBtn_thirdteen.addEventListener('click', () => {
         console.timeEnd("Timer Demo");
     });
-
+    // console trace 
     let errorBtn_fourteen = errorBtns[13];
     errorBtn_fourteen.addEventListener('click', () => {
         function One() {
@@ -181,7 +189,7 @@
         }
           One();
     });
-
+    // error function
     let errorBtn_fifteen = errorBtns[14];
     errorBtn_fifteen.addEventListener('click', () => {
         errorFunction();
@@ -215,14 +223,39 @@
       finally {
         console.log("continue");
       }
-
-      // TrackJS
+    /*
       window.onerror = function(message, url, line, col, error) {
         console.log(`${message}\n At ${line}:${col} of ${url}`);
         TrackJS.track("TrackJS Error");
-      };
+      }; */
 
     });
+
+    // TrackJS
+    var clientCatch ={};
+
+  clientCatch.reportError = function (msg) {
+    function senderror(error) {
+      console.log('error was: ' + error + ", function not written");
+    }
+    senderror();
+    return true; 
+  }
+
+  TrackJs.track("Testing");
+  clientCatch.registerErrorHandler = function () {
+    if (window.onerror) {
+      let oldError = window.onerror;
+      let newEhandler = function (error){console.log(error)};
+    }
+    else {
+      window.onerror = clientCatch.reportError;
+    }
+  }
+
+  clientCatch.registerErrorHandler();
+
+  wackfunk();
   </script>
 </body>
 
